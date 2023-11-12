@@ -12,3 +12,10 @@ kubectl apply -f ./istio-1.19.3/samples/bookinfo/platform/kube/bookinfo.yaml
 kubectl get pods -n default
 istioctl analyze
 ```
+
+## Check the deployed web application
+```bash
+kubectl get svc -A
+kubectl port-forward svc/productpage 9080
+open http://127.0.0.1/
+```
