@@ -40,6 +40,14 @@ echo http://$INGRESS_HOST:$INGRESS_PORT/productpage
 
 curl http://$INGRESS_HOST:$INGRESS_PORT/productpage
 
+curl -s -HHost:xxx.app http://$INGRESS_HOST:$INGRESS_PORT/productpage | grep -o "<title>.*</title>"
+
 # open the website
 http://192.168.64.50:32074/productpage
+
+# update local DNS
+echo -e "$(minikube ip)\tbookinfo.app" | sudo tee -a /etc/hosts
+
+curl http://bookinfo.app:32074/productpage | grep -o "<title>.*</title>"
+
 ```
