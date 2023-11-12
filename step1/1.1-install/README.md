@@ -10,8 +10,7 @@ ls | grep istio
 ISTIO_VERSION=istio-1.19.3
 
 # Setup working directory path
-WD=$(pwd)
-export PATH="$PATH:$WD/$ISTIO_VERSION/bin"
+export PATH="$PATH:$(pwd)/$ISTIO_VERSION/bin"
 
 # Verify
 istioctl version
