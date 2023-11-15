@@ -1,6 +1,6 @@
 
 # Istio Gateway
-![Screenshot](/img/gateway.png)
+![Screenshot](/img/istio-gateway.png)
 
 ## Access product page with Port-Forwarding
 
