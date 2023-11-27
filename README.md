@@ -5,12 +5,18 @@
 minikube start --memory=8192 --cpus=4 --driver=hyperkit
 ```
 
-## Deploy Microservices with version 1
+## Deploy Microservices
 ```bash
-# deploy services
-kubectl apply -f microservices/deploy/v3
+# deploy services with version 1
+kubectl apply -f microservices/deploy/v1
 
 # verfiy the http results
+kubectl port-forward svc/payment-service  8888
+kubectl port-forward svc/review-service  9999
+
+# check the version 3
+kubectl delete -f microservices/deploy/v1
+kubectl apply -f microservices/deploy/v3
 kubectl port-forward svc/payment-service  8888
 kubectl port-forward svc/review-service  9999
 ```
