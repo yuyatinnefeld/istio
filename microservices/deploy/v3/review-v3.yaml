@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: review-app-deploy
+  labels:
+    app: review-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  review-app
+  template:
+    metadata:
+      labels:
+        app:  review-app
+    spec:
+      containers:
+        - name: review-app
+          image: yuyatinnefeld/golang-review-app:3.0.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: review-service
+spec:
+  selector:
+    app:  review-app
+  ports:
+    - port: 9999
+      targetPort: 9999
+      name: http-review
+  type: LoadBalancer

@@ -5,19 +5,14 @@
 minikube start --memory=8192 --cpus=4 --driver=hyperkit
 ```
 
-## Deploy Microservices
+## Deploy Microservices with version 1
 ```bash
-# verify version 1
-kubectl apply -f microservices/deploy/deploy-v1.yaml
-
-# verify version 2
-kubectl apply -f microservices/deploy/deploy-v2.yaml
-
-# verify version 3
-kubectl apply -f microservices/deploy/deploy-v3.yaml
+# deploy services
+kubectl apply -f microservices/deploy/v3
 
 # verfiy the http results
-kubectl port-forward svc/http-golang-service 8888
+kubectl port-forward svc/payment-service  8888
+kubectl port-forward svc/review-service  9999
 ```
 
 ## Step 1 - Initial Setup

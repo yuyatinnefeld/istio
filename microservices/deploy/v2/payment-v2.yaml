@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: http-golang-app-deploy
+  name: payment-app-deploy
   labels:
-    app: http-golang-app
+    app: payment-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app:  http-golang-app
+      app:  payment-app
   template:
     metadata:
       labels:
-        app:  http-golang-app
+        app:  payment-app
     spec:
       containers:
-        - name: http-golang-app
-          image: yuyatinnefeld/golang-app:1.0.0
+        - name: payment-app
+          image: yuyatinnefeld/golang-payment-app:2.0.0
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: http-golang-service
+  name: payment-service
 spec:
   selector:
-    app:  http-golang-app
+    app:  payment-app
   ports:
     - port: 8888
       targetPort: 8888
-      name: http-frontend
+      name: http-payment
   type: LoadBalancer
