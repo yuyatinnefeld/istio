@@ -1,9 +1,9 @@
 # Deploy microservices with Proxy Injection
 
-## Clean Up
+## Clean Up (If the Microservices running)
 ```bash
 # recreate services
-kubectl delete -f microservices/deploy/v3
+kubectl delete -f microservices/deploy/no-service-mesh/v3
 
 # delete if you are using ingress rule
 kubectl delete -f microservices/deploy/ingress.yaml
@@ -52,7 +52,7 @@ kubectl get all -n istio-system
 ## Restart Microservices
 ```bash
 # redeploy
-kubectl apply -f microservices/deploy/v1
+kubectl apply -f microservices/deploy/service-mesh
 
 # check the side-car proxy
 istioctl analyze

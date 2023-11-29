@@ -8,14 +8,14 @@
 ## Quick Test
 ```bash
 # deploy microservices with version 1
-kubectl apply -f microservices/deploy/v1
+kubectl apply -f microservices/deploy/no-service-mesh/v1
 
 # verfiy the services with v1
 kubectl port-forward svc/frontend-service  5000
 
 # update the services with v3
-kubectl delete -f microservices/deploy/v1
-kubectl apply -f microservices/deploy/v3
+kubectl delete -f microservices/deploy/no-service-mesh/v1
+kubectl apply -f microservices/deploy/no-service-mesh/v3
 kubectl port-forward svc/frontend-service  5000
 ```
 
@@ -29,4 +29,4 @@ kubectl port-forward svc/frontend-service  5000
 
 ## Deploy Kubernetes Ingress Controller (Nginx) & Ingress rules
 
-`microservices/k8s-ingress`
+`microservices/no-service-mesh-ingress`

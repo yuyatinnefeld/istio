@@ -39,7 +39,7 @@ echo http://$INGRESS_HOST:$INGRESS_PORT/
 
 curl http://$INGRESS_HOST:$INGRESS_PORT/
 
-# open the website
+# open the website (example)
 http://192.168.64.50:32074
 
 # update local DNS
