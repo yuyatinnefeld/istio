@@ -10,15 +10,15 @@ minikube start --memory=8192 --cpus=4 --driver=hyperkit
 # deploy services with version 1
 kubectl apply -f microservices/deploy/v1
 
-# verfiy the http results
+# verfiy the backend apis with v1
 kubectl port-forward svc/payment-service  8888
 kubectl port-forward svc/review-service  9999
+kubectl port-forward svc/frontend-service  5000
 
-# check the version 3
+# update the backend apis with v3
 kubectl delete -f microservices/deploy/v1
 kubectl apply -f microservices/deploy/v3
-kubectl port-forward svc/payment-service  8888
-kubectl port-forward svc/review-service  9999
+kubectl port-forward svc/frontend-service  5000
 ```
 
 ## Step 1 - Initial Setup
