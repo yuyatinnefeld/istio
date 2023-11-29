@@ -1,4 +1,3 @@
-
 # Istio Gateway
 ![Screenshot](/img/istio-gateway.png)
 
@@ -6,8 +5,8 @@
 
 Here you can just forward and call the application
 ```bash
-kubectl port-forward svc/productpage 9080
-open http://127.0.0.1:9080/productpage
+kubectl port-forward svc/frontend-service 5000
+curl http://127.0.0.1:5000
 ```
 
 ## Activate Ingress and Gateway
@@ -18,13 +17,13 @@ Traffic -> Gateway -> Ingress -> Application
 kubectl get svc -n istio-system | grep istio-ingressgateway
 
 # deploy ingress
-kubectl apply -f istio-1.19.3/samples/bookinfo/platform/kube/bookinfo-ingress.yaml
+kubectl apply -f microservices/istio-ingress/istio-ingress.yaml
 
 # verify
 kubectl get ingress -A
 
 # deploy gateway
-kubectl apply -f step3/3.1-gateway/bookinfo-gateway.yaml
+kubectl apply -f microservices/istio-ingress/istio-gateway.yaml
 
 # verify
 kubectl get gateway -A
@@ -36,18 +35,15 @@ export INGRESS_HOST=$(minikube ip)
 
 export INGRESS_PORT=$(kubectl -n istio-system get svc istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].nodePort}')
 
-echo http://$INGRESS_HOST:$INGRESS_PORT/productpage
+echo http://$INGRESS_HOST:$INGRESS_PORT/
 
-curl http://$INGRESS_HOST:$INGRESS_PORT/productpage
-
-curl -s -HHost:xxx.app http://$INGRESS_HOST:$INGRESS_PORT/productpage | grep -o "<title>.*</title>"
+curl http://$INGRESS_HOST:$INGRESS_PORT/
 
 # open the website
-http://192.168.64.50:32074/productpage
+http://192.168.64.50:32074
 
 # update local DNS
-echo -e "$(minikube ip)\tbookinfo.app" | sudo tee -a /etc/hosts
+echo -e "$(minikube ip)\ttesting-yuya.com" | sudo tee -a /etc/hosts
 
-curl http://bookinfo.app:32074/productpage | grep -o "<title>.*</title>"
-
+curl http://testing-yuya.com:32074 
 ```

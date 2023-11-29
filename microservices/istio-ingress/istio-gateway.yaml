@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: bookinfo-gateway
+  name: testing-yuya-gateway
 spec:
   # The selector matches the ingress gateway pod labels.
   # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
@@ -13,31 +13,27 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "bookinfo.app"
+    - "testing-yuya.com"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: bookinfo
+  name: testing-yuya
 spec:
   hosts:
-  - "bookinfo.app"
+  - "testing-yuya.com"
   gateways:
-  - bookinfo-gateway
+  - testing-yuya-gateway
   http:
   - match:
     - uri:
-        exact: /productpage
+        exact: /
     - uri:
-        prefix: /static
+        exact: /payment
     - uri:
-        exact: /login
-    - uri:
-        exact: /logout
-    - uri:
-        prefix: /api/v1/products
+        exact: /review
     route:
     - destination:
-        host: productpage
+        host: frontend-service # service name
         port:
-          number: 9080
+          number: 5000
