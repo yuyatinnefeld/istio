@@ -1,4 +1,4 @@
-# Redeploy microservices
+# Deploy microservices with Proxy Injection
 
 ## Clean Up
 ```bash
