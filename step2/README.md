@@ -3,6 +3,8 @@
 
 
 ## Run Kiali
+![Screenshot](/img/kiali.png)
+
 ```bash
 # check the installation tools
 ls ./istio-1.19.3/samples/addons
@@ -34,11 +36,11 @@ open http://localhost:20001
 
 ## Create Traffic
 ```bash
-SERVICE_NAME="productpage"
-kubectl get svc -n default | grep productpage
+SERVICE_NAME="frontend-service"
+kubectl get svc -n default | grep frontend-service
 SERVICE_PORT="9080"
 
 kubectl port-forward svc/$SERVICE_NAME $SERVICE_PORT
 
-curl "http://127.0.0.1:$SERVICE_PORT/productpage"
+curl "http://127.0.0.1:$SERVICE_PORT"
 ```
