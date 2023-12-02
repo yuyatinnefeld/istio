@@ -34,6 +34,6 @@ spec:
         exact: /review
     route:
     - destination:
-        host: frontend-service # service name
+        host: frontend-service
         port:
           number: 5000

@@ -2,9 +2,9 @@
 
 ## Deploy Virutal Service
 ```bash
-kubectl apply -f istio-1.19.3/samples/bookinfo/networking/destination-rule-all.yaml
+kubectl apply -f microservices/deploy/service-mesh-istio-official/traffic/destination-rule-all.yaml
 
-kubectl apply -f step3/3.2-virtual-services/virtual-service.yml
+kubectl apply -f microservices/deploy/service-mesh-istio-official/traffic/virtual-service.yaml
 
 # check the Kiali UI
 Kiali UI > Istio Config > Namespace: default > VirtualService > reviews-route
@@ -18,7 +18,7 @@ Kiali UI > Graph
 ## Update Virutal Service
 ```bash
 # update routing
-kubectl apply -f step3/3.2-virtual-services/virtual-service-update.yml
+kubectl apply -f microservices/deploy/service-mesh-istio-official/traffic/virtual-service-update.yaml
 
 ```
 
@@ -27,7 +27,7 @@ kubectl apply -f step3/3.2-virtual-services/virtual-service-update.yml
 ## Personalization with Virtual Service
 ```bash
 # update routing
-kubectl apply -f step3/3.2-virtual-services/virtual-service-personal.yml
+kubectl apply -f microservices/deploy/service-mesh-istio-project/traffic/virtual-service-personalized.yaml
 ```
 Login and check the review star color
 

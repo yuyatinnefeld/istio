@@ -1,0 +1,87 @@
+##################################################################################################
+# payment service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-service
+  labels:
+    app: payment
+    service: payment
+spec:
+  selector:
+    app:  payment-app
+  ports:
+    - port: 8888
+      targetPort: 8888
+      name: http-payment
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-v1
+  labels:
+    app: payment-app
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  payment-app
+      version: v1
+  template:
+    metadata:
+      labels:
+        app:  payment-app
+        version: v1
+    spec:
+      containers:
+        - name: payment-app
+          image: yuyatinnefeld/golang-payment-app:1.0.0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-v2
+  labels:
+    app: payment-app
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  payment-app
+      version: v2
+  template:
+    metadata:
+      labels:
+        app:  payment-app
+        version: v2
+    spec:
+      containers:
+        - name: payment-app
+          image: yuyatinnefeld/golang-payment-app:2.0.0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-v3
+  labels:
+    app: payment-app
+    version: v3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  payment-app
+      version: v3
+  template:
+    metadata:
+      labels:
+        app:  payment-app
+        version: v3
+    spec:
+      containers:
+        - name: payment-app
+          image: yuyatinnefeld/golang-payment-app:3.0.0

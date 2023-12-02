@@ -17,13 +17,13 @@ Traffic -> Gateway -> Ingress -> Application
 kubectl get svc -n istio-system | grep istio-ingressgateway
 
 # deploy ingress
-kubectl apply -f microservices/istio-ingress/istio-ingress.yaml
+kubectl apply -f microservices/deploy/service-mesh/istio/gateway/istio-ingress.yaml
 
 # verify
 kubectl get ingress -A
 
 # deploy gateway
-kubectl apply -f microservices/istio-ingress/istio-gateway.yaml
+kubectl apply -f microservices/deploy/service-mesh/istio/gateway/istio-gateway.yaml
 
 # verify
 kubectl get gateway -A

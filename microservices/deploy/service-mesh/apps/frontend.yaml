@@ -1,0 +1,38 @@
+##################################################################################################
+# fronend service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app:  frontend-app
+  ports:
+    - port: 5000
+      targetPort: 5000
+      name: http-frontend
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-app-deploy
+  labels:
+    app: frontend-app
+    service: frontend
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      app:  frontend-app
+      version: v1
+  template:
+    metadata:
+      labels:
+        app:  frontend-app
+        version: v1
+    spec:
+      containers:
+        - name: frontend-app
+          image: yuyatinnefeld/python-frontend-app:3.0.0

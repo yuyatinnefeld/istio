@@ -1,0 +1,90 @@
+##################################################################################################
+# review service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: review-service
+  labels:
+    app: review
+    service: review
+spec:
+  selector:
+    app:  review-app
+  ports:
+    - port: 9999
+      targetPort: 9999
+      name: http-review
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: review-v1
+  labels:
+    app: review-app
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  review-app
+      version: v1
+  template:
+    metadata:
+      name: review
+      labels:
+        app:  review-app
+        version: v1
+    spec:
+      containers:
+        - name: review-app
+          image: yuyatinnefeld/golang-review-app:1.0.0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: review-v2
+  labels:
+    app: review-app
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  review-app
+      version: v2
+  template:
+    metadata:
+      name: review
+      labels:
+        app:  review-app
+        version: v2
+    spec:
+      containers:
+        - name: review-app
+          image: yuyatinnefeld/golang-review-app:2.0.0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: review-v3
+  labels:
+    app: review-app
+    version: v3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  review-app
+      version: v3
+  template:
+    metadata:
+      name: review
+      labels:
+        app:  review-app
+        version: v3
+    spec:
+      containers:
+        - name: review-app
+          image: yuyatinnefeld/golang-review-app:3.0.0
