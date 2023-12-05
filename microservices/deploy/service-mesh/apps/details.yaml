@@ -1,0 +1,87 @@
+##################################################################################################
+# details service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: details-service
+  labels:
+    app: details
+    service: details
+spec:
+  selector:
+    app:  details-app
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: http-details
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: details-v1
+  labels:
+    app: details-app
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  details-app
+      version: v1
+  template:
+    metadata:
+      labels:
+        app:  details-app
+        version: v1
+    spec:
+      containers:
+        - name: details-app
+          image: yuyatinnefeld/java-details-app:1.0.0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: details-v2
+  labels:
+    app: details-app
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  details-app
+      version: v2
+  template:
+    metadata:
+      labels:
+        app:  details-app
+        version: v2
+    spec:
+      containers:
+        - name: details-app
+          image: yuyatinnefeld/java-details-app:2.0.0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: details-v3
+  labels:
+    app: details-app
+    version: v3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  details-app
+      version: v3
+  template:
+    metadata:
+      labels:
+        app:  details-app
+        version: v3
+    spec:
+      containers:
+        - name: details-app
+          image: yuyatinnefeld/java-details-app:3.0.0

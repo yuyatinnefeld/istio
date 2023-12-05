@@ -1,6 +1,6 @@
 # Push Docker image into Docker Repo
 
-## Build Payment Image
+## Build Payment App Image
 ```bash
 cd microservices/app/payment
 
@@ -21,7 +21,7 @@ docker build -t $REPO_NAME/$IMAGE_NAME .
 docker image push $REPO_NAME/$IMAGE_NAME
 ```
 
-## Build Review Image
+## Build Review App Image
 ```bash
 cd microservices/app/review
 
@@ -30,13 +30,22 @@ IMAGE_NAME=golang-review-app:1.0.0
 docker build -t $REPO_NAME/$IMAGE_NAME .
 docker run -p 9999:9999 -t $REPO_NAME/$IMAGE_NAME
 docker image push $REPO_NAME/$IMAGE_NAME
-
-# create version 2 from review app
-
-# create version 3 from review app
 ```
 
-## Build Frontend Image
+
+## Build Details App Image
+```bash
+cd microservices/app/details
+
+REPO_NAME="yuyatinnefeld"
+IMAGE_NAME="java-details-app:1.0.0"
+docker build -t $REPO_NAME/$IMAGE_NAME .
+docker run -it -p 8080:8080 $REPO_NAME/$IMAGE_NAME
+docker image push $REPO_NAME/$IMAGE_NAME
+```
+
+
+## Build Frontend App Image
 ```bash
 cd microservices/app/frontend
 
