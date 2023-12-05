@@ -15,5 +15,5 @@ func main() {
 func hello(w http.ResponseWriter, r *http.Request) {
     w.WriteHeader(http.StatusOK)
     w.Header().Set("Content-Type", "application/json")
-    w.Write([]byte(`{"app":"payment-app", "version": "3.0.0"}`))
+    w.Write([]byte(`{"app":"payment-app", "version": "3.0.0", "language": "golang"}`))
 }

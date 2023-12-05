@@ -35,4 +35,4 @@ spec:
     spec:
       containers:
         - name: frontend-app
-          image: yuyatinnefeld/python-frontend-app:3.0.0
+          image: yuyatinnefeld/python-frontend-app:4.0.0

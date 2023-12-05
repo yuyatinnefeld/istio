@@ -18,9 +18,15 @@ def fetch_data(url):
     else:
         return None
 
+
+@app.route('/test', methods=['GET'])
+def test():
+    message = f"Frontend APP - TEST PAGE"
+    return jsonify(message)
+
+
 @app.route('/', methods=['GET'])
 def index():
-    
     #!!!! fetch data from public apis !!!!#
     # review_data = fetch_data('http://testing-yuya.com/review')
     # payment_data = fetch_data('http://testing-yuya.com/payment')
@@ -34,7 +40,7 @@ def index():
     else:
         message = f"Frontend APP - Review API: {review_data}, Payment API: {payment_data}"
         return jsonify(message)
-    return("Frontend API")
+
 
 if __name__ == '__main__':
     app.run(debug=True)
