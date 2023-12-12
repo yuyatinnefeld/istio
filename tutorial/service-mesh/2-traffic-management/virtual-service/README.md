@@ -20,5 +20,13 @@ kubectl apply -f microservices/deploy/service-mesh/istio/traffic/destination-rul
 kubectl port-forward svc/frontend-service  5000
 
 # change the virutal service
-kubectl apply -f microservices/deploy/service-mesh/istio/traffic/virtual-service-update.yaml
+kubectl apply -f microservices/deploy/service-mesh/istio/traffic/virtual-service-traffic-splitting.yaml
+
+# change the virutal service
+kubectl apply -f microservices/deploy/service-mesh/istio/traffic/virtual-service-testing.yaml
+
+localhost:5000/test-v1
+
+localhost:5000/test-v2
+
 ```
