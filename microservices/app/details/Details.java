@@ -23,10 +23,7 @@ public class Details {
             System.out.println("Request received from: " + t.getRemoteAddress().toString());
 
             // Displaying json string
-            String jsonObj = "{app:details-app, version: 3.0.0, language: java}";
-
-            String response = "<html><body><p>" + jsonObj + "</p>\n";
-            response += "</ul></body></html>\n";
+            String response = "{app:details-app, version: 4.0.0, language: java}";
 
             // Sending response
             t.sendResponseHeaders(200, response.length());
