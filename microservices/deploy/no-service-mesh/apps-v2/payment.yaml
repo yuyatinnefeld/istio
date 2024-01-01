@@ -1,3 +1,6 @@
+##################################################################################################
+# payment service
+##################################################################################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,7 +19,7 @@ spec:
     spec:
       containers:
         - name: payment-app
-          image: yuyatinnefeld/golang-payment-app:3.0.0
+          image: yuyatinnefeld/microservice-payment-app:2.0.0
 ---
 apiVersion: v1
 kind: Service
@@ -29,4 +32,4 @@ spec:
     - port: 8888
       targetPort: 8888
       name: http-payment
-  type: LoadBalancer
+  type: ClusterIP

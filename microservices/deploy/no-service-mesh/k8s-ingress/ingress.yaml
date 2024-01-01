@@ -23,10 +23,17 @@ spec:
             name: payment-service
             port:
               name: http-payment
-      - path: /review
+      - path: /reviews
         pathType: Prefix
         backend:
           service:
-            name: review-service
+            name: reviews-service
             port:
-              name: http-review
+              name: http-reviews
+      - path: /details
+        pathType: Prefix
+        backend:
+          service:
+            name: details-service
+            port:
+              name: http-details
