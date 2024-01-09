@@ -35,4 +35,4 @@ spec:
     spec:
       containers:
         - name: frontend-app
-          image: yuyatinnefeld/python-frontend-app:7.0.0
+          image: yuyatinnefeld/microservice-frontend-app:1.0.0

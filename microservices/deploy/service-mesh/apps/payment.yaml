@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: payment-app
-          image: yuyatinnefeld/golang-payment-app:1.0.0
+          image: yuyatinnefeld/microservice-payment-app:1.0.0
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -61,7 +61,7 @@ spec:
     spec:
       containers:
         - name: payment-app
-          image: yuyatinnefeld/golang-payment-app:2.0.0
+          image: yuyatinnefeld/microservice-payment-app:2.0.0
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -84,4 +84,4 @@ spec:
     spec:
       containers:
         - name: payment-app
-          image: yuyatinnefeld/golang-payment-app:3.0.0
+          image: yuyatinnefeld/microservice-payment-app:3.0.0
