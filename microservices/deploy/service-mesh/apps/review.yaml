@@ -1,90 +1,90 @@
 ##################################################################################################
-# review service
+# reviews service
 ##################################################################################################
 apiVersion: v1
 kind: Service
 metadata:
-  name: review-service
+  name: reviews-service
   labels:
-    app: review
-    service: review
+    app: reviews
+    service: reviews
 spec:
   selector:
-    app:  review-app
+    app:  reviews-app
   ports:
     - port: 9999
       targetPort: 9999
-      name: http-review
+      name: http-reviews
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: review-v1
+  name: reviews-v1
   labels:
-    app: review-app
+    app: reviews-app
     version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app:  review-app
+      app:  reviews-app
       version: v1
   template:
     metadata:
-      name: review
+      name: reviews
       labels:
-        app:  review-app
+        app:  reviews-app
         version: v1
     spec:
       containers:
-        - name: review-app
-          image: yuyatinnefeld/golang-review-app:1.0.0
+        - name: reviews-app
+          image: yuyatinnefeld/microservice-reviews-app:1.0.0
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: review-v2
+  name: reviews-v2
   labels:
-    app: review-app
+    app: reviews-app
     version: v2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app:  review-app
+      app:  reviews-app
       version: v2
   template:
     metadata:
-      name: review
+      name: reviews
       labels:
-        app:  review-app
+        app:  reviews-app
         version: v2
     spec:
       containers:
-        - name: review-app
-          image: yuyatinnefeld/golang-review-app:2.0.0
+        - name: reviews-app
+          image: yuyatinnefeld/microservice-reviews-app:2.0.0
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: review-v3
+  name: reviews-v3
   labels:
-    app: review-app
+    app: reviews-app
     version: v3
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app:  review-app
+      app:  reviews-app
       version: v3
   template:
     metadata:
-      name: review
+      name: reviews
       labels:
-        app:  review-app
+        app:  reviews-app
         version: v3
     spec:
       containers:
-        - name: review-app
-          image: yuyatinnefeld/golang-review-app:3.0.0
+        - name: reviews-app
+          image: yuyatinnefeld/microservice-reviews-app:3.0.0
