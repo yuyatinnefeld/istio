@@ -33,10 +33,3 @@ spec:
             name: payment-service
             port:
               number: 8888
-      - path: /details
-        pathType: Exact
-        backend:
-          service:
-            name: details-service
-            port:
-              number: 7777
