@@ -9,7 +9,7 @@ This repository offers two pathways to Istio mastery. Dive into my personal micr
 - [Session 1](https://yuyatinnefeld.com/2024-01-10-istio-hands-on-pt1)
 
 ## Kiali Dashboard
-- [Session 2](https://yuyatinnefeld.com/2024-01-10-istio-hands-on-pt2)
+- [Session 2](https://yuyatinnefeld.com/2024-01-12-istio-hands-on-pt2/)
 
 ## Traffic Management
 - Gateways
