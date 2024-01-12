@@ -19,11 +19,11 @@ spec:
             name: frontend-service
             port:
               number: 5000
-      - path: /review
+      - path: /reviews
         pathType: Prefix
         backend:
           service:
-            name: review-service
+            name: reviews-service
             port:
               number: 9999
       - path: /payment
@@ -33,4 +33,10 @@ spec:
             name: payment-service
             port:
               number: 8888
----
+      - path: /details
+        pathType: Exact
+        backend:
+          service:
+            name: details-service
+            port:
+              number: 8080
