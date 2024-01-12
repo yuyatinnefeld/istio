@@ -28,12 +28,24 @@ spec:
   - match:
     - uri:
         exact: /
-    - uri:
-        exact: /payment
-    - uri:
-        exact: /reviews
     route:
     - destination:
         host: frontend-service
         port:
           number: 5000
+  - match:
+    - uri:
+        exact: /payment
+    route:
+    - destination:
+        host: payment-service
+        port:
+          number: 8888
+  - match:
+    - uri:
+        exact: /reviews
+    route:
+    - destination:
+        host: reviews-service
+        port:
+          number: 9999
