@@ -8,9 +8,25 @@ This repository offers two pathways to Istio mastery. Dive into my personal micr
 ## Deploy Microservices with Service Mesh
 - [Session 1](https://yuyatinnefeld.com/2024-01-10-istio-hands-on-pt1)
 
-## Istio Tutorials
-`./tutorials`
-- Kiali Dashboard
-- Traffic Management
-- Security
-- Observability
+## Kiali Dashboard
+- [Session 2](https://yuyatinnefeld.com/2024-01-10-istio-hands-on-pt2)
+
+## Traffic Management
+- Gateways
+- Virtural Service
+- Destination Rules
+- Faul Injection
+- Timemout
+- Retries
+- Circuit Breaker
+- A/B Testing
+
+## Security
+- Authentication
+- Authorization
+- Certificate Management
+
+## Observability
+- Prometheus
+- Grafana
+- Tracing
