@@ -8,11 +8,11 @@ import com.sun.net.httpserver.HttpServer;
 
 public class Details {
     public static void main(String[] args) throws Exception {
-        final int port = 8080;
+        final int port = 7777;
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/", new MyHandler());
         server.setExecutor(null); // creates a default executor
-        System.out.println("Serving on port 8080..\n");
+        System.out.println("Serving on port 7777..\n");
         server.start();
     } 
 
@@ -23,7 +23,7 @@ public class Details {
             System.out.println("Request received from: " + t.getRemoteAddress().toString());
 
             // Displaying json string
-            String response = "{app:details, version: 3.0.0, language: java}";
+            String response = "{app:details, version:3.0.0, language:java}";
 
             // Sending response
             t.sendResponseHeaders(200, response.length());

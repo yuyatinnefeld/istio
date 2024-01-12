@@ -31,7 +31,9 @@ spec:
     - uri:
         exact: /payment
     - uri:
-        exact: /review
+        exact: /reviews
+    - uri:
+        exact: /details
     route:
     - destination:
         host: frontend-service

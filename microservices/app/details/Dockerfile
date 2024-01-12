@@ -6,6 +6,6 @@ COPY Details.java .
 
 RUN javac Details.java
 
-EXPOSE 8080
+EXPOSE 7777
 
 CMD ["java", "Details"]

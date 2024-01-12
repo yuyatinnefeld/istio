@@ -39,7 +39,7 @@ cd microservices/app/details
 REPO_NAME="yuyatinnefeld"
 IMAGE_NAME="microservice-details-app:1.0.0"
 docker build -t $REPO_NAME/$IMAGE_NAME .
-docker run -it -p 8080:8080 $REPO_NAME/$IMAGE_NAME
+docker run -it -p 7777:7777 $REPO_NAME/$IMAGE_NAME
 docker image push $REPO_NAME/$IMAGE_NAME
 ```
 

@@ -47,7 +47,7 @@ def index():
              # fetch data from kubernetes services #
             reviews_data = fetch_data('http://reviews-service:9999')
             payment_data = fetch_data('http://payment-service:8888')
-            details_data = fetch_data('http://details-service:8080') 
+            details_data = fetch_data('http://details-service:7777') 
         
         elif is_api_from == "docker":
             #!!!! fetch data from public apis !!!!#
