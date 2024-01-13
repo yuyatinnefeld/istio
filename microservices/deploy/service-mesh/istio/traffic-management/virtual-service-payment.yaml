@@ -4,7 +4,7 @@ metadata:
   name:  virtualservice-payment
 spec:
   hosts:
-  - payment-service
+  - payment-service # interpreted as payment-service.default.svc.cluster.local
   http:
   - route:
     - destination:
