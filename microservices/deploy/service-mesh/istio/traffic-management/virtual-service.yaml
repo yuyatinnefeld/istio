@@ -1,0 +1,34 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: virtualservice-init-config
+spec:
+  hosts:
+  - "microservices-yuya.com"
+  gateways:
+  - gateway-ms-yuya-app
+  http:
+  - match:
+    - uri:
+        exact: /
+    route:
+    - destination:
+        host: frontend-service
+  - match:
+    - uri:
+        exact: /details
+    route:
+    - destination:
+        host: details-service
+  - match:
+    - uri:
+        exact: /payment
+    route:
+    - destination:
+        host: payment-service
+  - match:
+    - uri:
+        exact: /reviews
+    route:
+    - destination:
+        host: reviews-service

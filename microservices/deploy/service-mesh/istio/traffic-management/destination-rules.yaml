@@ -12,9 +12,9 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: review
+  name: details
 spec:
-  host: review-service
+  host: details-service
   subsets:
   - name: v1
     labels:
@@ -32,6 +32,23 @@ metadata:
   name: payment
 spec:
   host: payment-service
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+  - name: v3
+    labels:
+      version: v3
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: reviews
+spec:
+  host: reviews-service
   subsets:
   - name: v1
     labels:
