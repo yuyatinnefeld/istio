@@ -21,9 +21,15 @@ def fetch_data(url):
 
     try:
         print("Serialize Data to Json")
-        print("Response: ",response.text)
-        data = response.json()
+        response_text = response.text
+        print("Response: ", response_text)
+        
+        if "details" in response_text:
+            data = response_text.replace("\"", "\'")
+        else:
+            data = response.json()
     except Exception as exc:
+        print(exc)
         error_message =  '{ "status":"error", "message": "data cannot be serialized" }'
         data = json.loads(error_message)
         is_serialized = False
@@ -58,7 +64,7 @@ def index():
         else:
             reviews_data = "dummy reviews data"
             payment_data = "dummy payment data"
-            details_data = "dummy details data"
+            details_data = fetch_data('http://localhost:7777') 
 
         message = f"Frontend APP Version: {frontend_version} - Reviews API: {reviews_data}, Payment API: {payment_data}, Details API: {details_data}"
         return jsonify(message)
