@@ -11,6 +11,12 @@ spec:
   - match:
     - uri:
         exact: /
+    - uri:
+        exact: /test
+    - uri:
+        exact: /login
+    - uri:
+        exact: /set_end_user
     route:
     - destination:
         host: frontend-service #short name: interpreted as frontend-service.default.svc.cluster.local
