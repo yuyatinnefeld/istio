@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>End-User Example</title>
+</head>
+<body>
+    <h1>Hello, {{ user_name }}!</h1>
+    <form action="/set_end_user" method="post">
+        <label for="user_name">Enter your name:</label>
+        <input type="text" id="user_name" name="user_name" required>
+        <button type="submit">Save Name</button>
+    </form>
+</body>
+</html>
