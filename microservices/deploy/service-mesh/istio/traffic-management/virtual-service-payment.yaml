@@ -4,14 +4,14 @@ metadata:
   name:  virtualservice-payment
 spec:
   hosts:
-  - payment-service # interpreted as payment-service.default.svc.cluster.local
+  - payment-service #short name: interpreted as payment-service.default.svc.cluster.local
   http:
   - route:
     - destination:
-        host: payment-service
+        host: payment-service #short name: interpreted as payment-service.default.svc.cluster.local
         subset: v1
       weight: 80
     - destination:
-        host: payment-service
+        host: payment-service #short name: interpreted as payment-service.default.svc.cluster.local
         subset: v3
       weight: 20

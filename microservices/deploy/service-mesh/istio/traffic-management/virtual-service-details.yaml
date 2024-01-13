@@ -4,7 +4,7 @@ metadata:
   name: details-route
 spec:
   hosts:
-  - details-service.default.svc.cluster.local
+  - details-service #short name: interpreted as details-service.default.svc.cluster.local
   http:
   - route:
     - destination:

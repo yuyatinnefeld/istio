@@ -13,22 +13,22 @@ spec:
         exact: /
     route:
     - destination:
-        host: frontend-service
+        host: frontend-service #short name: interpreted as frontend-service.default.svc.cluster.local
   - match:
     - uri:
         exact: /details
     route:
     - destination:
-        host: details-service
+        host: details-service #short name: interpreted as details-service.default.svc.cluster.local
   - match:
     - uri:
         exact: /payment
     route:
     - destination:
-        host: payment-service
+        host: payment-service #short name: interpreted as payment-service.default.svc.cluster.local
   - match:
     - uri:
         exact: /reviews
     route:
     - destination:
-        host: reviews-service
+        host: reviews-service #short name: interpreted as reviews-service.default.svc.cluster.local
