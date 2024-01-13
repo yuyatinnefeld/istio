@@ -9,7 +9,7 @@ spec:
     istio: ingressgateway # use istio default controller
   servers:
   - port:
-      number: 8080
+      number: 80
       name: http
       protocol: HTTP
     hosts:
@@ -33,6 +33,14 @@ spec:
         host: frontend-service
         port:
           number: 5000
+  - match:
+    - uri:
+        exact: /details
+    route:
+    - destination:
+        host: details-service
+        port:
+          number: 7777
   - match:
     - uri:
         exact: /payment
