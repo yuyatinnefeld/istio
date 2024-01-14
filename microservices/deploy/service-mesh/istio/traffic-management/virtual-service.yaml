@@ -12,7 +12,7 @@ spec:
     - uri:
         exact: /
     - uri:
-        exact: /test
+        exact: /health
     - uri:
         exact: /login
     - uri:
