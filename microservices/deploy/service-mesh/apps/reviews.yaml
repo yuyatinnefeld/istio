@@ -14,7 +14,7 @@ spec:
   ports:
     - port: 9999
       targetPort: 9999
-      name: http-reviews
+      name: http
   type: ClusterIP
 ---
 apiVersion: apps/v1
