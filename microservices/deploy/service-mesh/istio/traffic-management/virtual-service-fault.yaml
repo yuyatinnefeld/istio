@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: fault-injection-delay
+spec:
+  hosts:
+  - reviews-service.default.svc.cluster.local
+  http:
+  - fault:
+      delay:
+        fixedDelay: 7s
+        percentage:
+          value: 80.0
+    route:
+    - destination:
+        host: reviews-service.default.svc.cluster.local
+        subset: v1
