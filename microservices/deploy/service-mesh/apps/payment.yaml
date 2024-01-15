@@ -14,7 +14,7 @@ spec:
   ports:
     - port: 8888
       targetPort: 8888
-      name: http-payment
+      name: http
   type: ClusterIP
 ---
 apiVersion: apps/v1

@@ -14,7 +14,7 @@ spec:
   ports:
     - port: 5000
       targetPort: 5000
-      name: http-frontend
+      name: http
   type: LoadBalancer
 ---
 apiVersion: apps/v1

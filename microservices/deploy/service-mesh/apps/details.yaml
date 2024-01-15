@@ -14,7 +14,7 @@ spec:
   ports:
     - port: 7777
       targetPort: 7777
-      name: http-details
+      name: http
   type: ClusterIP
 ---
 apiVersion: apps/v1
