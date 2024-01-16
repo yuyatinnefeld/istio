@@ -6,7 +6,7 @@ spec:
   hosts:
   - "microservices-yuya.com"
   gateways:
-  - gateway-ms-yuya-app
+  - gateway-custom-hosts
   http:
   - match:
     - uri:
