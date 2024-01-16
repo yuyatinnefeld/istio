@@ -1,0 +1,44 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: virtualservice-init-config
+spec:
+  hosts:
+  - "microservices-yuya.com"
+  gateways:
+  - gateway-ms-yuya-app
+  http:
+  - match:
+    - uri:
+        exact: /
+    - uri:
+        exact: /health
+    - uri:
+        exact: /login
+    - uri:
+        exact: /set_end_user
+    route:
+    - destination:
+        host: frontend-service #short name: interpreted as frontend-service.default.svc.cluster.local
+    timeout: 3s
+  - match:
+    - uri:
+        exact: /details
+    route:
+    - destination:
+        host: details-service #short name: interpreted as details-service.default.svc.cluster.local
+    timeout: 3s
+  - match:
+    - uri:
+        exact: /payment
+    route:
+    - destination:
+        host: payment-service #short name: interpreted as payment-service.default.svc.cluster.local
+    timeout: 3s
+  - match:
+    - uri:
+        exact: /reviews
+    route:
+    - destination:
+        host: reviews-service #short name: interpreted as reviews-service.default.svc.cluster.local
+    timeout: 3s
