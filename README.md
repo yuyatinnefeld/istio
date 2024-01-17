@@ -12,14 +12,15 @@ This repository offers two pathways to Istio mastery. Dive into my personal micr
 - [Session 2](https://yuyatinnefeld.com/2024-01-12-istio-hands-on-pt2/)
 
 ## Traffic Management
-- Gateways
-- Virtural Service
-- Destination Rules
-- Faul Injection
-- Timemout
-- Retries
-- Circuit Breaker
-- A/B Testing
+- [Session 3](https://yuyatinnefeld.com/2024-01-17-istio-hands-on-pt3/)
+    - Gateways
+    - Virtural Service
+    - Destination Rules
+    - Faul Injection
+    - Circuit Breaker
+    - A/B Testing
+    - Timemout
+    - Retries
 
 ## Security
 - Authentication
