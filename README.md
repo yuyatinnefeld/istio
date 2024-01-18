@@ -1,18 +1,26 @@
 # Learning Istio
 
-This repository offers two pathways to Istio mastery. Dive into my personal microservice project (`./tutorial/service-mesh`) or explore the official Istio microservice project (`./tutorial/service-mesh-istio-offical`).
+## About
 
-## Deploy Microservices without Service Mesh
+This repository provides a comprehensive set of hands-on Istio tutorials, designed to guide you through practical exercises and demonstrations. Whether you are new to Istio or looking to deepen your understanding, these tutorials cover a range of topics, including:
+
+## Documentation
+
+### Deploy Microservices without Service Mesh
 - [Session 0](https://yuyatinnefeld.com/2024-01-02-istio-hands-on-pt0)
 
-## Deploy Microservices with Service Mesh
+### Deploy Microservices with Service Mesh
+Learn the essentials of configuring and setting up the Istio environment to kickstart your deployment.
 - [Session 1](https://yuyatinnefeld.com/2024-01-10-istio-hands-on-pt1)
 
-## Kiali Dashboard
+### Kiali Dashboard
+Explore the powerful features of the Kiali dashboard for monitoring and visualizing the service mesh.
 - [Session 2](https://yuyatinnefeld.com/2024-01-12-istio-hands-on-pt2/)
 
-## Traffic Management
+### Traffic Management
+Gain insights into Istio's traffic management capabilities, including routing, load balancing, and traffic shaping.
 - [Session 3](https://yuyatinnefeld.com/2024-01-17-istio-hands-on-pt3/)
+
     - Gateways
     - Virtural Service
     - Destination Rules
@@ -22,12 +30,16 @@ This repository offers two pathways to Istio mastery. Dive into my personal micr
     - Timemout
     - Retries
 
-## Security
+### Security
+Delve into Istio's security features, covering topics such as mTLS (mutual Transport Layer Security), access control, and policy enforcement.
+
 - Authentication
 - Authorization
 - Certificate Management
 
-## Observability
+### Observability
+Understand how to leverage Istio for observability, monitoring, and tracing, enabling effective management of your service mesh.
+
 - Prometheus
 - Grafana
 - Tracing
