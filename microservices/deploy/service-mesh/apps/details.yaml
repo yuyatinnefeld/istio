@@ -17,6 +17,13 @@ spec:
       name: http
   type: ClusterIP
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: microservice-details
+  labels:
+    account: details-sa
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
