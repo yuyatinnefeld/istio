@@ -20,9 +20,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: microservice-frontend
-  labels:
-    account: frontend-sa
+  name: frontend-sa
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -43,6 +41,7 @@ spec:
         app: frontend-app
         version: v1
     spec:
+      serviceAccountName: frontend-sa
       containers:
         - name: frontend-app
           image: yuyatinnefeld/microservice-frontend-app:1.0.0

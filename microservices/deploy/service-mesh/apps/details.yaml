@@ -20,7 +20,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: microservice-details
+  name: details-sa
   labels:
     account: details-sa
 ---
@@ -43,6 +43,7 @@ spec:
         app:  details-app
         version: v1
     spec:
+      serviceAccountName: details-sa
       containers:
         - name: details-app
           image: yuyatinnefeld/microservice-details-app:1.0.0
@@ -66,6 +67,7 @@ spec:
         app:  details-app
         version: v2
     spec:
+      serviceAccountName: details-sa
       containers:
         - name: details-app
           image: yuyatinnefeld/microservice-details-app:2.0.0
@@ -89,6 +91,7 @@ spec:
         app:  details-app
         version: v3
     spec:
+      serviceAccountName: details-sa
       containers:
         - name: details-app
           image: yuyatinnefeld/microservice-details-app:3.0.0

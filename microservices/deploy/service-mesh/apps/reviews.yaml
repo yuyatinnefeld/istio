@@ -20,9 +20,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: microservice-reviews
-  labels:
-    account: reviews-sa
+  name: reviews-sa
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -44,6 +42,7 @@ spec:
         app:  reviews-app
         version: v1
     spec:
+      serviceAccountName: reviews-sa
       containers:
         - name: reviews-app
           image: yuyatinnefeld/microservice-reviews-app:1.0.0
@@ -68,6 +67,7 @@ spec:
         app:  reviews-app
         version: v2
     spec:
+      serviceAccountName: reviews-sa
       containers:
         - name: reviews-app
           image: yuyatinnefeld/microservice-reviews-app:2.0.0
@@ -92,6 +92,7 @@ spec:
         app:  reviews-app
         version: v3
     spec:
+      serviceAccountName: reviews-sa
       containers:
         - name: reviews-app
           image: yuyatinnefeld/microservice-reviews-app:3.0.0
