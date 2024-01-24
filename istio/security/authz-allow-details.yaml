@@ -1,0 +1,17 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+ name: authz-allow-details-viewer
+ namespace: default
+spec:
+ selector:
+   matchLabels:
+     app: details-app
+ action: ALLOW
+ rules:
+ - from:
+   - source:
+       principals: ["cluster.local/ns/default/sa/frontend-sa"]
+   to:
+   - operation:
+       methods: ["GET"]

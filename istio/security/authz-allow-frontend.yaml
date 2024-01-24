@@ -1,0 +1,14 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: authz-allow-frontend-viewer
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: frontend-app
+  action: ALLOW
+  rules:
+  - to:
+    - operation:
+         methods: ["GET"]
