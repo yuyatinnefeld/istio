@@ -20,8 +20,8 @@ start_minikube_cluster() {
 }
 
 # Function to set up Istio environment
-setup_istio_environment() {
-    echo "############## SETUP ISTIO ENV ##############"
+setup_istioctl() {
+    echo "############## SETUP ISTIO CTL ##############"
     # Get current directory
     export SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
@@ -30,7 +30,11 @@ setup_istio_environment() {
 
     # Set up the working directory path
     export PATH="$PATH:$SCRIPTDIR/$ISTIO_DIR/bin"
+}
 
+# Function to set up Istio environment
+setup_istio_env() {
+    echo "############## SETUP ISTIO ENV ##############"
     # Install Istio profile
     echo "Istio profile installing..."
     istioctl install --set profile=demo -y
@@ -42,12 +46,6 @@ setup_istio_environment() {
     kubectl get namespace -L istio-injection
 }
 
-# Function to deploy microservices
-deploy_microservices() {
-    echo "############## DEPLOY MICROSERVICES ##############"
-    kubectl apply -f microservices/deploy/service-mesh/apps
-}
-
 # 1. Check if Minikube IP is available
 if ! minikube ip >/dev/null 2>&1; then
     start_minikube_cluster
@@ -55,12 +53,16 @@ else
     echo "Minikube IP is already available."
 fi
 
-# 2. Check if ISTIO ENV is available
+# 2. Check if ISTIO CTL is available
 if ! istioctl version >/dev/null 2>&1; then
-    setup_istio_environment
+    setup_istioctl
 else
     echo "ISTIO CTL is already available."
 fi
 
-# Continue with Istio setup and microservices deployment
-deploy_microservices
+# 3. Check if ISTIO ENV is available
+if ! istioctl version >/dev/null 2>&1; then
+    setup_istio_env
+else
+    echo "ISTIO ENV is already available."
+fi
