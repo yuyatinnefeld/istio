@@ -61,7 +61,7 @@ else
 fi
 
 # 3. Check if ISTIO ENV is available
-if ! istioctl version >/dev/null 2>&1; then
+if ! istioctl verify-install >/dev/null 2>&1; then
     setup_istio_env
 else
     echo "ISTIO ENV is already available."
