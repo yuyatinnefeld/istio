@@ -30,17 +30,19 @@ setup_istioctl() {
 
     # Set up the working directory path
     export PATH="$PATH:$SCRIPTDIR/$ISTIO_DIR/bin"
+
+    echo "Istioctl is available now"
 }
 
 # Function to set up Istio environment
 setup_istio_env() {
-    echo "############## SETUP ISTIO ENV ##############"
+    echo "############## INSTALL ISTIO PROFILE ##############"
     # Install Istio profile
     echo "Istio profile installing..."
     istioctl install --set profile=demo -y
 
     # Enable Istio injection for the default namespace
-    echo "Istio injection enabling..."
+    echo "############## ENABLE ISTIO INJECTION ##############"
     kubectl label namespace default istio-injection=enabled
     kubectl get ns default --show-labels
     kubectl get namespace -L istio-injection
