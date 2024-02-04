@@ -11,3 +11,7 @@ package-lock.json
 # Python
 venv
 __pycache__
+
+# Logs
+/bug-report
+bug-report.tar.gz
