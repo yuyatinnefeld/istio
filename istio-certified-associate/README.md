@@ -28,5 +28,5 @@
 - Configure mutual TLS at mesh, namespace, and workload levels
 
 ## 5. Advanced Scenarios 13%
-- Understand how to onboard non-Kubernetes workloads to the mesh
+- Understand how to onboard non-Kubernetes workloads to the mesh (VMs, WASM)
 - Troubleshoot configuration issues
