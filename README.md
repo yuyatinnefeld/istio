@@ -16,6 +16,8 @@ Learn the essentials of configuring and setting up the Istio environment to kick
 ### Observability
 Explore the powerful features of the Kiali dashboard and jaeger for monitoring and tracing the service mesh.
 - [Session 2](https://yuyatinnefeld.com/2024-01-12-istio-hands-on-pt2/)
+    - Kiali
+    - Jaeger
 
 ### Traffic Management
 Gain insights into Istio's traffic management capabilities, including routing, load balancing, and traffic shaping.
@@ -40,6 +42,13 @@ Delve into Istio's security features, covering topics such as mTLS (mutual Trans
 
 ### Debugging / Troubelshooting
 Understand how to use Istio CLI to troubleshoot issues with your mesh.
+- [Session 5](https://yuyatinnefeld.com/2024-02-06-istio-hands-on-pt5/)
+
+    - Istio Injection
+    - Istioctl Tools
+    - Dry Run
+    - Authorization
+    - Kiali
 
 ## ICA (Istio Certified Associate)
 Preparing for the ICA. Here, I will review the exam questions and provide answers.
