@@ -1,0 +1,13 @@
+namespace: prod
+
+details:
+  appName: details-app-prod
+
+frontend:
+  appName: frontend-app-prod
+
+payment:
+  appName: payment-app-prod
+
+reviews:
+  appName: reviews-app-prod

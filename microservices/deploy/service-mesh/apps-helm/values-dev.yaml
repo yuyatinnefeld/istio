@@ -1,0 +1,13 @@
+namespace: dev
+
+details:
+  appName: details-app-dev
+
+frontend:
+  appName: frontend-app-dev
+
+payment:
+  appName: payment-app-dev
+
+reviews:
+  appName: reviews-app-dev

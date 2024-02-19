@@ -1,0 +1,95 @@
+##################################################################################################
+# payment service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.payment.serviceName }}
+  labels:
+    app: {{ .Values.payment.appName }}
+    service: {{ .Values.payment.serviceName }}
+spec:
+  selector:
+    app:  {{ .Values.payment.appName }}
+  ports:
+    - port: 8888
+      targetPort: 8888
+      name: http
+  type: ClusterIP
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.payment.serviceAccountName }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-v1
+  labels:
+    app: {{ .Values.payment.appName }}
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  {{ .Values.payment.appName }}
+      version: v1
+  template:
+    metadata:
+      labels:
+        app:  {{ .Values.payment.appName }}
+        version: v1
+    spec:
+      serviceAccountName: {{ .Values.payment.serviceAccountName }}
+      containers:
+        - name: {{ .Values.payment.appName }}
+          image: "{{ .Values.payment.imageName }}:1.0.0"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-v2
+  labels:
+    app: {{ .Values.payment.appName }}
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  {{ .Values.payment.appName }}
+      version: v2
+  template:
+    metadata:
+      labels:
+        app:  {{ .Values.payment.appName }}
+        version: v2
+    spec:
+      serviceAccountName: {{ .Values.payment.serviceAccountName }}
+      containers:
+        - name: {{ .Values.payment.appName }}
+          image: "{{ .Values.payment.imageName }}:2.0.0"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-v3
+  labels:
+    app: {{ .Values.payment.appName }}
+    version: v3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  {{ .Values.payment.appName }}
+      version: v3
+  template:
+    metadata:
+      labels:
+        app:  {{ .Values.payment.appName }}
+        version: v3
+    spec:
+      serviceAccountName: {{ .Values.payment.serviceAccountName }}
+      containers:
+        - name: {{ .Values.payment.appName }}
+          image: "{{ .Values.payment.imageName }}:3.0.0"
