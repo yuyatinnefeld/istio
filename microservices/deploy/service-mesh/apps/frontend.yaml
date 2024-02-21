@@ -45,3 +45,14 @@ spec:
       containers:
         - name: frontend-app
           image: yuyatinnefeld/microservice-frontend-app:1.0.0
+          readinessProbe:
+            tcpSocket:
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 3
+            periodSeconds: 3
