@@ -1,5 +1,5 @@
 # Istio consule
-istio-1.19.3
+istio-1.*
 
 # Mac cache
 .DS_Store
