@@ -21,6 +21,19 @@ spec:
       containers:
         - name: details-app
           image: yuyatinnefeld/microservice-details-app:3.0.0
+          ports:
+            - containerPort: 7777
+          env:
+            - name: MESSAGE
+              value: "..."
+            - name: VERSION
+              value: "3.0.0"
+            - name: ENV
+              value: "DEV"
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
 ---
 apiVersion: v1
 kind: Service

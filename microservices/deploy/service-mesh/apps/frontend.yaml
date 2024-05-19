@@ -25,7 +25,7 @@ metadata:
 #################################################################################################
 # deployment v1
 ##################################################################################################
-apiVersion: apps/v1s
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-v1
@@ -48,6 +48,21 @@ spec:
       containers:
         - name: frontend-app
           image: yuyatinnefeld/microservice-frontend-app:1.0.0
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MESSAGE
+              value: "..."
+            - name: VERSION
+              value: "1.0.0"
+            - name: ENV
+              value: "DEV"
+            - name: PLATFORM
+              value: "K8S"
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           readinessProbe:
             tcpSocket:
               port: 5000

@@ -16,6 +16,21 @@ spec:
       containers:
         - name: frontend-app
           image: yuyatinnefeld/microservice-frontend-app:1.0.0
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MESSAGE
+              value: "..."
+            - name: VERSION
+              value: "1.0.0"
+            - name: ENV
+              value: "DEV"
+            - name: PLATFORM
+              value: "K8S"
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
 ---
 apiVersion: v1
 kind: Service

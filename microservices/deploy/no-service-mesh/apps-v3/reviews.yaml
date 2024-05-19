@@ -24,7 +24,7 @@ spec:
             - containerPort: 8888
           env:
             - name: MESSAGE
-              value: "MY_K8S_MESSAGE"
+              value: "..."
             - name: VERSION
               value: "3.0.0"
             - name: ENV

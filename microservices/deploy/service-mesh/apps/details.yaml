@@ -50,6 +50,19 @@ spec:
       containers:
         - name: details-app
           image: yuyatinnefeld/microservice-details-app:1.0.0
+          ports:
+            - containerPort: 7777
+          env:
+            - name: MESSAGE
+              value: "..."
+            - name: VERSION
+              value: "1.0.0"
+            - name: ENV
+              value: "DEV"
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
 ---
 #################################################################################################
 # deployment v2
@@ -76,7 +89,20 @@ spec:
       serviceAccountName: details-sa
       containers:
         - name: details-app
-          image: yuyatinnefeld/microservice-details-app:3.0.0
+          image: yuyatinnefeld/microservice-details-app:2.0.0
+          ports:
+            - containerPort: 7777
+          env:
+            - name: MESSAGE
+              value: "..."
+            - name: VERSION
+              value: "2.0.0"
+            - name: ENV
+              value: "DEV"
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
 ---
 #################################################################################################
 # deployment v3
@@ -104,3 +130,16 @@ spec:
       containers:
         - name: details-app
           image: yuyatinnefeld/microservice-details-app:3.0.0
+          ports:
+            - containerPort: 7777
+          env:
+            - name: MESSAGE
+              value: "..."
+            - name: VERSION
+              value: "3.0.0"
+            - name: ENV
+              value: "DEV"
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name

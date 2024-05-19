@@ -4,10 +4,13 @@ import json
 import requests
 import time
 from concurrent.futures import ThreadPoolExecutor
+import os
 
-
-FRONTEND_VERSION = "1.0.0"
-ENV = "k8s"
+# Read environment variables
+version = os.getenv("VERSION", "0.0.0")
+env = os.getenv("ENV", "ENV_NOT_DEFINED")
+pod_id = os.getenv("VERSION", "PODID_NOT_DEFINED")
+platform = os.getenv("PLATFORM", "LOCAL")
 
 app = Flask(__name__)
 
@@ -35,9 +38,9 @@ def serialize_data(response):
 
 
 def get_url(service_name, port):
-    if ENV == "k8s":
+    if platform == "K8S":
         url = f'http://{service_name}-service:{port}'
-    elif ENV == "localhost":
+    elif platform == "LOCAL":
         url = f'http://localhost:{port}'
     else:
         url = "service is not available"
@@ -100,9 +103,17 @@ def index():
     
     with ThreadPoolExecutor() as executor:
         result_data_list = list(executor.map(fetch_url, url_list))
+    
+    frontend_api_info=f"FRONTEND API: {version} | env: {env} | pod_id: {pod_id} | platform: {platform}"
+    
+    result = jsonify(
+        api=frontend_api_info,
+        details=result_data_list[0],
+        payment=result_data_list[1],
+        reviews=result_data_list[2],
+    )
 
-    message = f"FRONTEND API: {FRONTEND_VERSION} - DETAILS API: {result_data_list[0]}, PAYMENT API: {result_data_list[1]}, REVIEWS API: {result_data_list[2]}"
-    return jsonify(message)
+    return result
 
 
 if __name__ == '__main__':
