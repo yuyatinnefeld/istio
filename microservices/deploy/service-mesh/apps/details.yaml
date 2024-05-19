@@ -1,5 +1,5 @@
 ##################################################################################################
-# details service
+# details
 ##################################################################################################
 apiVersion: v1
 kind: Service
@@ -24,6 +24,9 @@ metadata:
   labels:
     account: details-sa
 ---
+#################################################################################################
+# deployment v1
+##################################################################################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -48,6 +51,9 @@ spec:
         - name: details-app
           image: yuyatinnefeld/microservice-details-app:1.0.0
 ---
+#################################################################################################
+# deployment v2
+##################################################################################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -70,8 +76,11 @@ spec:
       serviceAccountName: details-sa
       containers:
         - name: details-app
-          image: yuyatinnefeld/microservice-details-app:2.0.0
+          image: yuyatinnefeld/microservice-details-app:3.0.0
 ---
+#################################################################################################
+# deployment v3
+##################################################################################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:

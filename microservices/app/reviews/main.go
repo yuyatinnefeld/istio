@@ -1,9 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"io"
+	"log"
 	"net/http"
+	"os"
 	"sync"
 
 	"golang.org/x/time/rate"
@@ -12,14 +14,31 @@ import (
 var limiter = rate.NewLimiter(rate.Limit(5), 1) // Adjust the rate limit as needed
 var mu sync.Mutex
 
-func main() {
-	port := 9999
-	http.HandleFunc("/", MyHandler)
-	fmt.Printf("Serving on port %d..\n", port)
-	http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+type Response struct {
+	AppName    string `json:"appName"`
+	Language   string `json:"language"`
+	Version    string `json:"version"`
+	Message    string `json:"message"`
+	Enviroment string `json:"env"`
+	PodID      string `json:"podID"`
 }
 
-func MyHandler(w http.ResponseWriter, r *http.Request) {
+func setEnvOrDefault(envName string, defaultValue string) string {
+	if val, ok := os.LookupEnv(envName); ok {
+		return val
+	}
+	return defaultValue
+}
+
+func fetchAPIResource(w http.ResponseWriter, r *http.Request) {
+	appName := "reviews"
+	language := "golang"
+
+	version := setEnvOrDefault("VERSION", "0.0.0")
+	message := setEnvOrDefault("MESSAGE", "MESSAGE_NOT_DEFINED")
+	env := setEnvOrDefault("ENV", "ENV_NOT_DEFINED")
+	podID := setEnvOrDefault("MY_POD_NAME", "PODID_NOT_DEFINED")
+
 	mu.Lock()
 	defer mu.Unlock()
 
@@ -29,14 +48,22 @@ func MyHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Logging IP address of request to stdout
-	fmt.Println("Request received from:", r.RemoteAddr)
+	response := Response{
+		AppName:  appName,
+		Language: language,
+		Version:  version,
+		Message:  message,
+		Enviroment: env,
+		PodID:    podID,
+	}
 
-	// Displaying JSON string
-	response := `{"app": "reviews", "version": "1.0.0", "language": "golang"}`
-
-	// Sending response
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	io.WriteString(w, response)
+	json.NewEncoder(w).Encode(response)
+}
+
+func main() {
+	http.HandleFunc("/", fetchAPIResource)
+	port := 9999
+	fmt.Printf("Serving on port %d..\n", port)
+	log.Fatal(http.ListenAndServe(":9999", nil))
 }

@@ -1,5 +1,5 @@
 ##################################################################################################
-# payment service
+# payment
 ##################################################################################################
 apiVersion: v1
 kind: Service
@@ -22,6 +22,9 @@ kind: ServiceAccount
 metadata:
   name: payment-sa
 ---
+#################################################################################################
+# deployment v1
+##################################################################################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -45,7 +48,23 @@ spec:
       containers:
         - name: payment-app
           image: yuyatinnefeld/microservice-payment-app:1.0.0
+          ports:
+            - containerPort: 8888
+          env:
+            - name: MESSAGE
+              value: "MY_K8S_MESSAGE"
+            - name: VERSION
+              value: "1.0.0"
+            - name: ENV
+              value: "DEV"
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
 ---
+#################################################################################################
+# deployment v2
+##################################################################################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -69,7 +88,23 @@ spec:
       containers:
         - name: payment-app
           image: yuyatinnefeld/microservice-payment-app:2.0.0
+          ports:
+            - containerPort: 8888
+          env:
+            - name: MESSAGE
+              value: "MY_K8S_MESSAGE"
+            - name: VERSION
+              value: "2.0.0"
+            - name: ENV
+              value: "DEV"
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
 ---
+#################################################################################################
+# deployment v3
+##################################################################################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -93,3 +128,16 @@ spec:
       containers:
         - name: payment-app
           image: yuyatinnefeld/microservice-payment-app:3.0.0
+          ports:
+            - containerPort: 8888
+          env:
+            - name: MESSAGE
+              value: "MY_K8S_MESSAGE"
+            - name: VERSION
+              value: "3.0.0"
+            - name: ENV
+              value: "DEV"
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
