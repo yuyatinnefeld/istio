@@ -11,24 +11,28 @@ install_helm_istio() {
     helm repo update
 
     echo "############## INSTALL ISTIO WITH HELM ##############"
-    echo "create namespace istio-system..."
+    echo "create namespace $NS..."
     kubectl create namespace $NS
 
     echo "############## INSTALL ISTIO BASE CHART ##############"
     helm install istio-base istio/base -n $NS --set defaultRevision=default
-    helm ls -n istio-system
+    helm ls -n $NS
 
     echo "############## INSTALL ISTIOD CHART ##############"
-    helm install istiod istio/istiod -n istio-system --wait
-    helm ls -n istio-system
-    kubectl get deployments -n istio-system --output wide
+    helm install istiod istio/istiod -n $NS --wait
+    helm ls -n $NS
+    kubectl get deployments -n $NS --output wide
 
     echo "############## INSTALL ISTIO INGRESS CHART ##############"
     kubectl create namespace istio-ingress
-    helm install istio-ingress istio/gateway -n istio-ingress --wait
+    helm install istio-ingressgateway istio/gateway -n $NS --wait
     
     echo "############## ISTIO INJECTION ENABLED ##############"
     kubectl label namespace default istio-injection=enabled
+    kubectl get namespace -L istio-injection
+
+    echo "############## DONE ! ##############"
+
 }
 
 # 1. Check if Minikube IP is available
