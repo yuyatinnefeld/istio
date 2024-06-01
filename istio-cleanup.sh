@@ -3,12 +3,6 @@
 # Author Yuya Tinnefeld
 #
 
-delete_apps() {
-    echo "############## DELETE MS APPLICATION ##############"
-    kubectl delete -f microservices/deploy/service-mesh/apps
-    kubectl delete -f microservices/deploy/service-mesh/sample
-}
-
 delete_istio_traffic_management() {
     echo "############## DEPLOY ISTIO INGRESS ##############"
     kubectl delete -f istio/traffic-management/istio-ingress.yaml
