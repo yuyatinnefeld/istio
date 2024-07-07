@@ -1,0 +1,21 @@
+replicaCount: 1
+
+image:
+  repository: docker.io/istio/proxyv2
+  tag: 1.14.1
+  pullPolicy: IfNotPresent
+
+serviceAccount:
+  name: istio-egressgateway-service-account
+
+resources:
+  limits:
+    cpu: 2000m
+    memory: 1024Mi
+  requests:
+    cpu: 10m
+    memory: 40Mi
+
+affinity: {}
+nodeSelector: {}
+tolerations: []
