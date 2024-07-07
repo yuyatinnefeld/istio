@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: istio-egressgateway
+  name: {{ .Chart.Name }}
   namespace: istio-system
   labels:
-    app: istio-egressgateway
+    app: {{ .Chart.Name }}
     install.operator.istio.io/owning-resource: unknown
     install.operator.istio.io/owning-resource-namespace: istio-system
     istio: egressgateway
@@ -17,7 +17,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: istio-egressgateway
+      app: {{ .Chart.Name }}
       istio: egressgateway
   strategy:
     rollingUpdate:
@@ -32,7 +32,7 @@ spec:
         prometheus.io/scrape: "true"
         sidecar.istio.io/inject: "false"
       labels:
-        app: istio-egressgateway
+        app: {{ .Chart.Name }}
         chart: {{ .Chart.Name }}
         heritage: Helm
         install.operator.istio.io/owning-resource: unknown
@@ -40,7 +40,7 @@ spec:
         istio.io/rev: default
         operator.istio.io/component: EgressGateways
         release: istio
-        service.istio.io/canonical-name: istio-egressgateway
+        service.istio.io/canonical-name: {{ .Chart.Name }}
         service.istio.io/canonical-revision: latest
         sidecar.istio.io/inject: "false"
     spec:
@@ -51,13 +51,11 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: 8080
-          protocol: TCP
-        - containerPort: 8443
-          protocol: TCP
-        - containerPort: 15090
-          name: http-envoy-prom
-          protocol: TCP
+        {{- range .Values.ports }}
+        - name: {{ .name }}
+          containerPort: {{ .containerPort }}
+          protocol: {{ .protocol }}
+        {{- end }}
         args:
         - proxy
         - router
@@ -98,9 +96,9 @@ spec:
             fieldRef:
               fieldPath: spec.serviceAccountName
         - name: ISTIO_META_WORKLOAD_NAME
-          value: istio-egressgateway
+          value: {{ .Chart.Name }}
         - name: ISTIO_META_OWNER
-          value: kubernetes://apis/apps/v1/namespaces/istio-system/deployments/istio-egressgateway
+          value: kubernetes://apis/apps/v1/namespaces/istio-system/deployments/{{ .Chart.Name }}
         - name: ISTIO_META_MESH_ID
           value: cluster.local
         - name: TRUST_DOMAIN
@@ -192,8 +190,8 @@ spec:
       - name: egressgateway-certs
         secret:
           optional: true
-          secretName: istio-egressgateway-certs
+          secretName: {{ .Chart.Name }}-certs
       - name: egressgateway-ca-certs
         secret:
           optional: true
-          secretName: istio-egressgateway-ca-certss
+          secretName: {{ .Chart.Name }}-ca-certss

@@ -17,5 +17,23 @@ resources:
     memory: 40Mi
 
 affinity: {}
-nodeSelector: {}
-tolerations: []
+
+ports:
+  - name: http
+    containerPort: 8080
+    protocol: TCP
+  - name: https
+    containerPort: 8443
+    protocol: TCP
+  - name: tcp
+    containerPort: 31400
+    protocol: TCP
+  - name: tls
+    containerPort: 15443
+    protocol: TCP
+  - name: prometheus
+    containerPort: 15090
+    protocol: TCP
+  - name: healthz
+    containerPort: 15021
+    protocol: TCP

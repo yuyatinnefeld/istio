@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: istio-ingressgateway
+  name: {{ .Chart.Name }}
   namespace: istio-system
   labels:
-    app: istio-ingressgateway
+    app: {{ .Chart.Name }}
     install.operator.istio.io/owning-resource: unknown
     install.operator.istio.io/owning-resource-namespace: istio-system
     istio: ingressgateway
@@ -17,7 +17,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: istio-ingressgateway
+      app: {{ .Chart.Name }}
       istio: ingressgateway
   strategy:
     rollingUpdate:
@@ -32,7 +32,7 @@ spec:
         prometheus.io/scrape: "true"
         sidecar.istio.io/inject: "false"
       labels:
-        app: istio-ingressgateway
+        app: {{ .Chart.Name }}
         chart: {{ .Chart.Name }}
         heritage: Tiller
         install.operator.istio.io/owning-resource: unknown
@@ -40,7 +40,7 @@ spec:
         istio.io/rev: default
         operator.istio.io/component: IngressGateways
         release: istio
-        service.istio.io/canonical-name: istio-ingressgateway
+        service.istio.io/canonical-name: {{ .Chart.Name }}
         service.istio.io/canonical-revision: latest
         sidecar.istio.io/inject: "false"
     spec:
@@ -93,9 +93,9 @@ spec:
               apiVersion: v1
               fieldPath: spec.serviceAccountName
         - name: ISTIO_META_WORKLOAD_NAME
-          value: istio-ingressgateway
+          value: {{ .Chart.Name }}
         - name: ISTIO_META_OWNER
-          value: kubernetes://apis/apps/v1/namespaces/istio-system/deployments/istio-ingressgateway
+          value: kubernetes://apis/apps/v1/namespaces/istio-system/deployments/{{ .Chart.Name }}
         - name: ISTIO_META_MESH_ID
           value: cluster.local
         - name: TRUST_DOMAIN
@@ -108,19 +108,11 @@ spec:
         imagePullPolicy: IfNotPresent
         name: istio-proxy
         ports:
-        - containerPort: 15021
-          protocol: TCP
-        - containerPort: 8080
-          protocol: TCP
-        - containerPort: 8443
-          protocol: TCP
-        - containerPort: 31400
-          protocol: TCP
-        - containerPort: 15443
-          protocol: TCP
-        - containerPort: 15090
-          name: http-envoy-prom
-          protocol: TCP
+        {{- range .Values.ports }}
+        - name: {{ .name }}
+          containerPort: {{ .containerPort }}
+          protocol: {{ .protocol }}
+        {{- end }}
         readinessProbe:
           failureThreshold: 30
           httpGet:
@@ -179,8 +171,8 @@ spec:
         runAsGroup: 1337
         runAsNonRoot: true
         runAsUser: 1337
-      serviceAccount: istio-ingressgateway-service-account
-      serviceAccountName: istio-ingressgateway-service-account
+      serviceAccount: {{ .Chart.Name }}-service-account
+      serviceAccountName: {{ .Chart.Name }}-service-account
       terminationGracePeriodSeconds: 30
       volumes:
       - emptyDir: {}
@@ -224,9 +216,9 @@ spec:
         secret:
           defaultMode: 420
           optional: true
-          secretName: istio-ingressgateway-certs
+          secretName: {{ .Chart.Name }}-certs
       - name: ingressgateway-ca-certs
         secret:
           defaultMode: 420
           optional: true
-          secretName: istio-ingressgateway-ca-certs
+          secretName: {{ .Chart.Name }}-ca-certs

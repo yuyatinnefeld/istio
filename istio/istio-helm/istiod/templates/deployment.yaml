@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: istiod
+  name: {{ .Chart.Name }}
   namespace: istio-system
   annotations:
     deployment.kubernetes.io/revision: "1"
   labels:
-    app: istiod
+    app: {{ .Chart.Name }}
     install.operator.istio.io/owning-resource: unknown
     install.operator.istio.io/owning-resource-namespace: istio-system
     istio: pilot
@@ -31,7 +31,7 @@ spec:
         prometheus.io/scrape: "true"
         sidecar.istio.io/inject: "false"
       labels:
-        app: istiod
+        app: {{ .Chart.Name }}
         install.operator.istio.io/owning-resource: unknown
         istio: pilot
         istio.io/rev: default
@@ -57,7 +57,7 @@ spec:
         - name: JWT_POLICY
           value: third-party-jwt
         - name: PILOT_CERT_PROVIDER
-          value: istiod
+          value: {{ .Chart.Name }}
         - name: POD_NAME
           valueFrom:
             fieldRef:
@@ -87,12 +87,11 @@ spec:
         - name: CLUSTER_ID
           value: Kubernetes
         ports:
-        - containerPort: 8080
-          protocol: TCP
-        - containerPort: 15010
-          protocol: TCP
-        - containerPort: 15017
-          protocol: TCP
+        {{- range .Values.ports }}
+        - name: {{ .name }}
+          containerPort: {{ .containerPort }}
+          protocol: {{ .protocol }}
+        {{- end }}
         readinessProbe:
           failureThreshold: 3
           httpGet:

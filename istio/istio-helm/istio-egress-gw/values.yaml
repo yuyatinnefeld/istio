@@ -17,5 +17,14 @@ resources:
     memory: 40Mi
 
 affinity: {}
-nodeSelector: {}
-tolerations: []
+
+ports:
+  - name: http
+    containerPort: 8080
+    protocol: TCP
+  - name: https
+    containerPort: 8443
+    protocol: TCP
+  - name: http-envoy-prom
+    containerPort: 15090
+    protocol: TCP
