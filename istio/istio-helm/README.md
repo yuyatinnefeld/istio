@@ -1,5 +1,14 @@
 # NOTE
 
+## Install Multi Chart
+
+```bash
+export ISTIO_CHART=istio-multichart
+helm install --debug --dry-run $ISTIO_CHART istio/istio-helm
+helm install $ISTIO_CHART istio/istio-helm
+```
+
+## Install Single Chart
 ```bash
 # IMPORTANT !install istiod at first!
 # if helm-deployment not successful => install istio with istioctl and delete deployments and retry
