@@ -1,6 +1,0 @@
-apiVersion: v2
-name: istio-egressgateway
-description: A Helm chart for Istio Egress Gateway
-type: application
-version: 0.1.0
-appVersion: "1.14.1"

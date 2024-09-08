@@ -1,34 +1,29 @@
-# NOTE
-
-## Install Multi Chart
+# Istio HelmCart
 
 ```bash
-export ISTIO_CHART=istio-multichart
-helm install --debug --dry-run $ISTIO_CHART istio/istio-helm
-helm install $ISTIO_CHART istio/istio-helm
+kubectl create namespace istio-system
 ```
 
-## Install Single Chart
+## Install Istio-base
 ```bash
-# IMPORTANT !install istiod at first!
-# if helm-deployment not successful => install istio with istioctl and delete deployments and retry
+helm install istio-base helm/base -n istio-system --set defaultRevision=default
+helm ls -n istio-system
+```
 
-# setup env variables
-export ISTIOD_CHART=istiod
-export EGRESS_CHART=istio-egress-gw
-export INGRESS_CHART=istio-ingress-gw
+## Install Istio Discovery
+```bash
+helm install istiod helm/istiod -n istio-system
+helm ls -n istio-system
+```
 
-# debug
-helm install --debug --dry-run $ISTIOD istio/istio-helm/$ISTIOD
-helm install --debug --dry-run $EGRESS_CHART istio/istio-helm/$EGRESS_CHART
-helm install --debug --dry-run $INGRESS_CHART istio/istio-helm/$INGRESS_CHART
+## Install Istio Egress
+```bash
+helm install istio-egress helm/istio-egress -n istio-system
+helm ls -n istio-system
+```
 
-# create chart
-helm install $ISTIOD_CHART istio/istio-helm/$ISTIOD_CHART
-helm install $EGRESS_CHART istio/istio-helm/$EGRESS_CHART
-helm install $INGRESS_CHART istio/istio-helm/$INGRESS_CHART
-
-# verify
-helm list
-kubectl get deployment -n istio-system
-``` 
+## Install Istio Ingress
+```bash
+helm install istio-ingress helm/istio-ingress -n istio-system
+helm ls -n istio-system
+```
