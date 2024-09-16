@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-istio-ingress
+  annotations:
+    kubernetes.io/ingress.class: "istio"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /v1
+        pathType: Exact
+        backend:
+          service:
+            name: dest-svc-v1
+            port:
+              name: "http-v1"
+      - path: /v2
+        pathType: Exact
+        backend:
+          service:
+            name: dest-svc-v2
+            port:
+              name: "http-v2"
+      # Catch-all rule for undefined paths (for 404)
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: dest-svc-error
+            port:
+              name: "http-error"
