@@ -1,0 +1,32 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: vs-google-via-egress-gw
+spec:
+  hosts:
+  - google.com
+  gateways:
+  - gw-egress-google
+  - mesh
+  http:
+  - match:
+    - gateways:
+      - mesh
+      port: 80
+    route:
+    - destination:
+        host: istio-egressgateway.istio-system.svc.cluster.local # forward traffics to gw-egress-google
+        subset: google
+        port:
+          number: 80
+      weight: 100
+  - match:
+    - gateways:
+      - gw-egress-google
+      port: 80
+    route:
+    - destination:
+        host: google.com
+        port:
+          number: 80
+      weight: 100

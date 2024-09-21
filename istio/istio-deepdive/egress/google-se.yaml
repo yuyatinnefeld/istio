@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry
+metadata:
+  name: se-google
+  namespace: application
+spec:
+  hosts:
+  - google.com
+  ports:
+  - number: 80
+    name: http-port
+    protocol: HTTP
+  - number: 443
+    name: https
+    protocol: HTTPS
+  resolution: DNS

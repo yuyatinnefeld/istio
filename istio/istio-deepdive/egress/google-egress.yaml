@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: gw-egress-google
+  namespace: application
+spec:
+  selector:
+    istio: egressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - google.com

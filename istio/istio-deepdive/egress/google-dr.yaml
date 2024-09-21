@@ -1,0 +1,9 @@
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: dr-egress-google
+  namespace: application
+spec:
+  host: istio-egressgateway.istio-system.svc.cluster.local
+  subsets:
+  - name: google
